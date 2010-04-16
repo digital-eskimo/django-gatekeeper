@@ -3,8 +3,10 @@
 
 {% block title %}Objects pending moderation{% endblock %}
 
-{% block stylesheet %}{% admin_media_prefix %}css/changelists.css{% endblock %}
-{% block extrahead %}<link href="/media/css/forms.css" type="text/css" rel="stylesheet">{% endblock %}
+{% block extrastyle %}
+<link href="{% admin_media_prefix %}css/changelists.css" type="text/css" rel="stylesheet">
+<link href="{% admin_media_prefix %}css/forms.css" type="text/css" rel="stylesheet">
+{% endblock %}
 
 {% block bodyclass %}change-list{% endblock %}
 
