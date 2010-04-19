@@ -16,6 +16,7 @@
 
 {% block content %}
 	<form action="{% url gatekeeper_moderate %}" method="post">
+		{% csrf_token %}
 		<div id="content-main">
 			{% block object-tools %}{% endblock %}
 			<div class="module filtered" id="changelist">
