@@ -3,9 +3,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.template import RequestContext
+
 from gatekeeper.models import ModeratedObject
 import datetime
 import gatekeeper
+
 
 @staff_member_required
 def moderate(request):
@@ -27,7 +30,6 @@ def moderate(request):
 
 @staff_member_required
 def moderate_list(request, app_label=None, model=None):
-    
     flagged_only = int(request.GET.get("flagged_only", 0))
     content_type = request.GET.get("content_type", None)
     if content_type:
@@ -41,12 +43,11 @@ def moderate_list(request, app_label=None, model=None):
         pending = pending.filter(flagged=True)
         
     cts = [ContentType.objects.get_for_model(model) for model in gatekeeper.registered_models]
-        
-    data = {
+    
+    return render_to_response('admin/gatekeeper/moderate.html', {
         "content_type": content_type,
         "flagged_only": flagged_only,
         "pending": pending,
         "cts": cts,
-    }
-    
-    return render_to_response('admin/gatekeeper/moderate.html', data)
+    }, context_instance=RequestContext(request))
+
