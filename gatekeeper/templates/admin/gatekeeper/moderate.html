@@ -1,11 +1,11 @@
 {% extends "admin/base_site.html" %}
-{% load adminmedia admin_list i18n %}
+{% load staticfiles admin_list i18n %}
 
 {% block title %}Objects pending moderation{% endblock %}
 
 {% block extrastyle %}
-<link href="{% admin_media_prefix %}css/changelists.css" type="text/css" rel="stylesheet">
-<link href="{% admin_media_prefix %}css/forms.css" type="text/css" rel="stylesheet">
+<link href="{% static 'admin_media/css/changelists.css' %}" type="text/css" rel="stylesheet">
+<link href="{% static 'admin_media/css/forms.css' %}" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block bodyclass %}change-list{% endblock %}
