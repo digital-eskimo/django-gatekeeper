@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 urlpatterns = patterns('',
     url(r'^moderate/save/$', 'gatekeeper.views.moderate', name="gatekeeper_moderate"),
