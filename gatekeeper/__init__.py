@@ -98,7 +98,7 @@ def add_fields(cls, manager_name, status_name, flagged_name,
             base_manager = Manager
 
     # queryset should inherit from manager's QuerySet
-    base_queryset = base_manager().get_query_set().__class__
+    base_queryset = base_manager().get_queryset().__class__
 
     class GatekeeperQuerySet(base_queryset):
         """ chainable queryset for checking status & flagging """
@@ -135,7 +135,7 @@ def add_fields(cls, manager_name, status_name, flagged_name,
         use_for_related_fields = True
 
         # add moderation_id, status_name, and flagged_name attributes to the query
-        def get_query_set(self):
+        def get_queryset(self):
             # parameters to help with generic SQL
             db_table = self.model._meta.db_table
             pk_name = self.model._meta.pk.attname
@@ -151,7 +151,7 @@ def add_fields(cls, manager_name, status_name, flagged_name,
             tables=[GATEKEEPER_TABLE]
 
             # build extra query then copy model/query to a GatekeeperQuerySet
-            q = super(GatekeeperManager, self).get_query_set().extra(
+            q = super(GatekeeperManager, self).get_queryset().extra(
                 select=select, where=where, tables=tables)
             return GatekeeperQuerySet(self.model, q.query)
 
